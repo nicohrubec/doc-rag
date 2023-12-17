@@ -10,7 +10,7 @@ from src.shared.prompt import build_prompt_with_context
 app = Flask(__name__)
 embedder = Embedder()
 db_client = Client[Doc](address=f"grpc://0.0.0.0:12345")
-num_context_prompts_used = 3
+num_context_prompts_used = 1
 openai_client = OpenAI()
 
 
