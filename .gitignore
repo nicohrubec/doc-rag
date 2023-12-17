@@ -1,2 +1,3 @@
-.idea
 docs/
+src/etl/__pycache__/
+.idea
