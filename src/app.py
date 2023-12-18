@@ -13,8 +13,7 @@ num_context_prompts_used = 1
 openai_client = OpenAI()
 
 
-# TODO: should be a POST request
-@app.route('/')
+@app.route('/', methods=['POST'])
 def find_nearest():
     user_request = request.json['request']
     request_embedding = embedder.embed([user_request])
