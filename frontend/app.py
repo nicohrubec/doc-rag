@@ -14,11 +14,8 @@ def index():
         backend_payload = {'request': user_input}
         backend_response = requests.post(BACKEND_SERVER_URL, json=backend_payload)
 
-        print(backend_response.text)
-
         if backend_response.status_code == 200:
             answer = backend_response.text
-            print(answer)
             return render_template("index.html", answer=answer)
         else:
             return 'Error communicating with the backend server', 500
@@ -27,4 +24,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=9000)
+    app.run(debug=False, port=9000)
