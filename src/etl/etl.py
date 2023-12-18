@@ -9,7 +9,6 @@ docs_path = Path.cwd().parent.parent / 'docs'
 archicad_manual_path = docs_path / 'Archicad.pdf'
 
 embedder = Embedder()
-db_index = db.get_index()
 
 if __name__ == '__main__':
     print("Extracting content from pdf ...")
@@ -19,4 +18,4 @@ if __name__ == '__main__':
     print("Index documents ...")
     docs = [{"id": str(i), "values": embeddings[i].tolist(), "metadata": {"text": pdf_content[i]}}
             for i in range(len(pdf_content))]
-    db_index.upsert(vectors=docs, namespace="archicad")
+    db.index_docs(docs)
