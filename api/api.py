@@ -2,9 +2,9 @@ from flask import Flask, request
 from openai import OpenAI
 import json
 
-from src.shared.embedder import Embedder
-from src.shared.prompt import build_prompt_with_context
-from src.shared import db
+from shared.embedder import Embedder
+from shared.prompt import build_prompt_with_context
+from shared import db
 
 app = Flask(__name__)
 embedder = Embedder()

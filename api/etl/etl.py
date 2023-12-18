@@ -1,8 +1,8 @@
 from pathlib import Path
 
 from pdf_reader import extract_text_from_pdf
-from src.shared.embedder import Embedder
-from src.shared import db
+from shared.embedder import Embedder
+from shared import db
 
 
 docs_path = Path.cwd().parent.parent / 'docs'
