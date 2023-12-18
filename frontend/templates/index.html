@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiCAD Chatbot</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #chat-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 1000px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        #chat-header {
+            background-color: #007bb5;
+            color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            border-bottom: 1px solid #005a8d;
+        }
+
+        #chat-messages {
+            padding: 15px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        #user-input {
+            width: calc(100% - 20px);
+            margin: 10px;
+            padding: 10px;
+            border: none;
+            outline: none;
+            border-top: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        #user-input:focus {
+            border-top: 1px solid #007bb5;
+        }
+
+        #submit-button {
+            width: calc(100% - 20px);
+            margin: 10px;
+            padding: 10px;
+            background-color: #007bb5;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #submit-button:hover {
+            background-color: #005a8d;
+        }
+
+        #response {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-header">ArchiCAD Chatbot</div>
+        <div id="chat-messages">What do you want to know about ArchiCAD?</div>
+        <form method="post" action="/">
+            <input type="text" name="user_input" id="user-input" placeholder="Type your question..." required>
+            <button type="submit" id="submit-button">Submit</button>
+        </form>
+        {% if answer %}
+        <div id="response">
+            <p><strong>ArchiCAD Chatbot:</strong> {{ answer }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
