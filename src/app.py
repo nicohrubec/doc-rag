@@ -1,15 +1,14 @@
 from flask import Flask, request
-from vectordb import Client
 from openai import OpenAI
 import json
 
 from src.shared.embedder import Embedder
-from src.db.schema import Doc
 from src.shared.prompt import build_prompt_with_context
+from src.shared import db
 
 app = Flask(__name__)
 embedder = Embedder()
-db_client = Client[Doc](address=f"grpc://0.0.0.0:12345")
+db_index = db.get_index()
 num_context_prompts_used = 1
 openai_client = OpenAI()
 
@@ -19,10 +18,16 @@ openai_client = OpenAI()
 def find_nearest():
     user_request = request.json['request']
     request_embedding = embedder.embed([user_request])
-    query = Doc(text=user_request, embedding=request_embedding)
-    result = db_client.search(inputs=query, limit=num_context_prompts_used)
-    contexts = [result.matches[i].text for i in range(num_context_prompts_used)]
 
+    result = db_index.query(
+        namespace="archicad",
+        vector=request_embedding.tolist(),
+        top_k=num_context_prompts_used,
+        include_values=False,
+        include_metadata=True,
+    )
+
+    contexts = [result.matches[i].metadata['text'] for i in range(num_context_prompts_used)]
     prompt = build_prompt_with_context(user_request, contexts)
 
     completion = openai_client.chat.completions.create(
