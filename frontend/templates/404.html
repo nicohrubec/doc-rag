@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to BauGPT</title>
+    <title>404 Not Found</title>
     <style>
         /* Add your CSS styles here */
         body {
@@ -18,7 +18,7 @@
             height: 100vh;
         }
 
-        #home-container {
+        #error-container {
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -28,46 +28,36 @@
             text-align: center;
         }
 
-        #home-header {
-            background-color: #007bb5;
+        #error-header {
+            background-color: #d9534f;
             color: #ffffff;
             padding: 15px;
-            font-size: 1.5em;
-            border-bottom: 1px solid #005a8d;
+            font-size: 1.2em;
+            border-bottom: 1px solid #ac2925;
         }
 
-        #home-message {
+        #error-message {
             padding: 15px;
         }
 
-        #archicad-button, #rfem-button {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px;
-            width: 200px;
-            background-color: #007bb5;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        #home-link {
+            color: #337ab7;
             text-decoration: none;
-            transition: background-color 0.3s;
+            font-weight: bold;
         }
 
-        #archicad-button:hover, #rfem-button:hover {
-            background-color: #005a8d;
+        #home-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div id="home-container">
-        <div id="home-header">Welcome to BauGPT!</div>
-        <div id="home-message">
-            <p>What is your question about?</p>
-            <a href="/archicad" id="archicad-button">ArchiCAD</a>
-            <a href="/rfem" id="rfem-button">RFEM</a>
+    <div id="error-container">
+        <div id="error-header">404 Not Found</div>
+        <div id="error-message">
+            <p>Oops! The page you are looking for might be in another dimension.</p>
+            <p><a href="/" id="home-link">Go back to the home page</a></p>
         </div>
     </div>
 </body>
 </html>
-
