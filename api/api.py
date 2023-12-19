@@ -13,8 +13,22 @@ num_context_prompts_used = 1
 openai_client = OpenAI()
 
 
+def validate_user_request(user_request):
+    if 'request' not in user_request.get_json():
+        return 'Request is missing', 400
+    if 'tool' not in user_request.get_json():
+        return 'Tool is missing', 400
+
+    return None, None
+
+
 @app.route('/', methods=['POST'])
 def find_nearest():
+    error_string, error_code = validate_user_request(request)
+
+    if error_code:
+        return error_string, error_code
+
     user_request = request.json['request']
     user_request_tool = request.json['tool']
     request_embedding = embedder.embed([user_request])
@@ -44,4 +58,4 @@ def find_nearest():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
