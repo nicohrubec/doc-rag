@@ -3,7 +3,7 @@ from openai import OpenAI
 import json
 
 from shared.embedder import Embedder
-from shared.prompt import build_prompt_with_context
+from shared.prompt import build_prompt_with_context, build_system_prompt_for_tool
 from shared import db
 
 app = Flask(__name__)
@@ -16,10 +16,11 @@ openai_client = OpenAI()
 @app.route('/', methods=['POST'])
 def find_nearest():
     user_request = request.json['request']
+    user_request_tool = request.json['tool']
     request_embedding = embedder.embed([user_request])
 
     result = db_index.query(
-        namespace="archicad",
+        namespace=user_request_tool,
         vector=request_embedding.tolist(),
         top_k=num_context_prompts_used,
         include_values=False,
@@ -28,12 +29,12 @@ def find_nearest():
 
     contexts = [result.matches[i].metadata['text'] for i in range(num_context_prompts_used)]
     prompt = build_prompt_with_context(user_request, contexts)
+    system_prompt = build_system_prompt_for_tool(user_request_tool)
 
     completion = openai_client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system",
-             "content": "You are a helpful assistant, skilled in explaining complex Archicad problems in simple terms."},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": prompt}
         ]
     )
