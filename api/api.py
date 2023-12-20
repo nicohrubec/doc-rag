@@ -9,7 +9,7 @@ from shared import db
 app = Flask(__name__)
 embedder = Embedder()
 db_index = db.get_index()
-num_context_prompts_used = 1
+num_context_prompts_used = 3
 openai_client = OpenAI()
 
 
