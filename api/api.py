@@ -46,7 +46,7 @@ def find_nearest():
     system_prompt = build_system_prompt_for_tool(user_request_tool)
 
     completion = openai_client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-1106",
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": prompt}
