@@ -1,9 +1,14 @@
 from flask import Flask, request, render_template
 import requests
+import os
 
 app = Flask(__name__)
 
-BACKEND_SERVER_URL = "http://127.0.0.1:5000"
+# check if we are running from docker
+if 'DOCKER_NETWORK' in os.environ and os.environ['DOCKER_NETWORK'] == 'true':
+    BACKEND_SERVER_URL = "http://backend-service:8000"
+else:
+    BACKEND_SERVER_URL = "http://127.0.0.1:8000"
 
 
 @app.route('/<tool>', methods=['GET', 'POST'])
