@@ -1,6 +1,7 @@
 services:
   frontend-service:
     container_name: frontend-service
+    image: nicohrubec/doc-rag-frontend-service
     build:
       dockerfile: Dockerfile
       context: ./frontend
@@ -14,6 +15,7 @@ services:
       - 9000:9000
   backend-service:
     container_name: backend-service
+    image: nicohrubec/doc-rag-backend-service
     build:
       dockerfile: Dockerfile
       context: ./api
