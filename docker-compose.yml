@@ -1,0 +1,12 @@
+services:
+  frontend-service:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    command: python3 -m flask run --host=0.0.0.0 --port=9000
+    environment:
+      - PORT=9000
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 9000:9000
