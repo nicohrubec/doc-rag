@@ -53,7 +53,7 @@ def find_nearest():
         ]
     )
 
-    response = json.loads(completion.json())['choices'][0]['message']['content']
+    response = json.loads(completion.model_dump_json())['choices'][0]['message']['content']
     return response
 
 
