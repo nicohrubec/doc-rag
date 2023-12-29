@@ -5,6 +5,10 @@ from tqdm import tqdm
 max_docs_indexed_at_once = 1000
 
 
+def get_document(id, embedding, text):
+    return {"id": str(id), "values": embedding, "metadata": {"text": text}}
+
+
 def get_index():
     pinecone.init(api_key=os.environ['PINECONE_API_KEY'], environment=os.environ['PINECONE_ENV'])
     return pinecone.Index("doc-rag")

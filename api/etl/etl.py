@@ -23,6 +23,5 @@ if __name__ == '__main__':
     print("Retrieve embeddings for content ...")
     embeddings = embedder.embed(pdf_content)
     print("Index documents ...")
-    docs = [{"id": str(i), "values": embeddings[i].tolist(), "metadata": {"text": pdf_content[i]}}
-            for i in range(len(pdf_content))]
+    docs = [db.get_document(str(i), embeddings[i].tolist(), pdf_content[i]) for i in range(len(pdf_content))]
     db.index_docs(docs, namespace=args.tool)
