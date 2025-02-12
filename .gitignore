@@ -2,6 +2,7 @@
 docs
 api/doc-rag-venv
 frontend/doc-rag-frontend-venv
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
